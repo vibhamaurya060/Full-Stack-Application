@@ -24,18 +24,25 @@ bookRouter.post('/upload', upload.array('images'), (req, res) => {
 });
 
 bookRouter.post('/',async (req, res) => {
-    const { author, title, frontCover, backCover, internalPages } = req.body;
-  
+  try {
+    const { title, author, pages } = req.body;
+    const frontCover = req.files.frontCover[0].path;
+    const backCover = req.files.backCover[0].path;
+
     const newBook = new Book({
-      author,
       title,
+      author,
       frontCover,
       backCover,
-      internalPages,
+      pages: JSON.parse(pages)
     });
-  
+
     await newBook.save();
     res.json(newBook);
+  }
+  catch(err){
+    res.status(500).send(err.message)
+  }
   });
   
 

@@ -7,19 +7,16 @@ export const generatePDF = (book, filePath) => {
     const stream = fs.createWriteStream(filePath);
     doc.pipe(stream);
 
-    // Front cover
     doc.image(book.frontCover, 0, 0, { width: doc.page.width, height: doc.page.height });
     doc.fontSize(30).text(book.title, 100, 50);
     doc.fontSize(20).text(book.author, 100, 100);
     doc.addPage();
 
-    // Internal pages
     book.internalPages.forEach(page => {
       doc.image(page, 0, 0, { width: doc.page.width, height: doc.page.height });
       doc.addPage();
     });
 
-    // Back cover
     doc.image(book.backCover, 0, 0, { width: doc.page.width, height: doc.page.height });
 
     doc.end();

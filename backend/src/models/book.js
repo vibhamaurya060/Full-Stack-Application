@@ -1,8 +1,8 @@
 import {Schema, model}  from 'mongoose';
 
 const bookSchema = new Schema({
-  title: {type: String},
-  author: {type: String},
+  title: {type: String, required:true},
+  author: {type: String, required:true},
   frontCover: {type: String},
   backCover: {type: String},
   internalPages: {type:[String]},
