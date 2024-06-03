@@ -7,14 +7,14 @@ const BookList = () => {
 
   useEffect(() => {
     const fetchBooks = async () => {
-      const response = await axios.get('http://localhost:8080/api/books');
+      const response = await axios.get('http://full-stack-application-3.onrender.com/');
       setBooks(response.data);
     };
     fetchBooks();
   }, []);
 
   const handleDownload = async (id) => {
-    window.open(`http://localhost:8080/api/books/download/${id}`, '_blank');
+    window.open(`http://full-stack-application-3.onrender.com/api/books/download/${id}`, '_blank');
   };
 
   return (
